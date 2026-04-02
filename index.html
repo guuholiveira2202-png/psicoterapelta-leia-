@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Drª. Ana Silva | Psicologia Clínica - Agendamento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="app-wrapper">
+
+        <section id="capa" class="capa-container active-capa">
+            <div class="capa-content">
+                
+                <img src="URL_DA_SUA_FOTO.jpg" alt="Foto da Drª. Ana Silva" class="capa-profile-pic">
+                
+                <i class="fa-solid fa-brain-circuit logo-icon"></i>
+                <h1>Drª. Ana Silva</h1>
+                <h2>Psicologia Clínica & Bem-Estar</h2>
+                <p>Encontre equilíbrio e acolhimento. Um espaço seguro para a sua jornada de autoconhecimento.</p>
+                <button class="btn-primary" onclick="iniciarAgendamento()">Fazer um Agendamento <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <div id="booking-area" class="hidden">
+            <header class="top-bar">
+                <button id="btn-voltar" class="hidden" onclick="voltarPasso()">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <h1 id="titulo-passo">Escolha a Sessão</h1>
+                <div style="width: 24px;"></div>
+            </header>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+
+            <section id="passo-1" class="step-container scrollable">
+                <div class="service-option" onclick="selecionarServico('Primeira Consulta (Avaliação)', 150.00)">
+                    <div class="icon-box"><i class="fa-solid fa-clipboard-user"></i></div>
+                    <div class="info"><h3>Primeira Consulta</h3><p>Avaliação inicial (60m)</p></div>
+                    <div class="price">R$ 150</div>
+                </div>
+                <div class="service-option" onclick="selecionarServico('Psicoterapia Individual', 120.00)">
+                    <div class="icon-box"><i class="fa-solid fa-user"></i></div>
+                    <div class="info"><h3>Psicoterapia Individual</h3><p>Acompanhamento (50m)</p></div>
+                    <div class="price">R$ 120</div>
+                </div>
+                <div class="service-option" onclick="selecionarServico('Terapia de Casal', 200.00)">
+                    <div class="icon-box"><i class="fa-solid fa-user-group"></i></div>
+                    <div class="info"><h3>Terapia de Casal</h3><p>Conflitos (75m)</p></div>
+                    <div class="price">R$ 200</div>
+                </div>
+                <div class="service-option" onclick="selecionarServico('Consulta Online', 120.00)">
+                    <div class="icon-box"><i class="fa-solid fa-laptop-medical"></i></div>
+                    <div class="info"><h3>Consulta Online</h3><p>Zoom/Meet (50m)</p></div>
+                    <div class="price">R$ 120</div>
+                </div>
+                <div class="service-option" onclick="selecionarServico('Terapia Infantil', 130.00)">
+                    <div class="icon-box"><i class="fa-solid fa-child-reaching"></i></div>
+                    <div class="info"><h3>Terapia Infantil</h3><p>Crianças e jovens (50m)</p></div>
+                    <div class="price">R$ 130</div>
+                </div>
+                <div class="service-option" onclick="selecionarServico('Orientação Vocacional', 180.00)">
+                    <div class="icon-box"><i class="fa-solid fa-compass"></i></div>
+                    <div class="info"><h3>Orientação Vocacional</h3><p>Testes e carreira</p></div>
+                    <div class="price">R$ 180</div>
+                </div>
+            </section>
+
+            <section id="passo-2" class="step-container">
+                <div class="form-clean">
+                    <label for="data">Qual é o melhor dia?</label>
+                    <input type="date" id="data" required>
+                    <label for="hora" style="margin-top: 25px;">E qual horário?</label>
+                    <input type="time" id="hora" required>
+                </div>
+                <button class="btn-primary" onclick="irParaResumo()">Continuar</button>
+            </section>
+
+            <section id="passo-3" class="step-container">
+                <div class="summary-card">
+                    <h2>Resumo do Agendamento</h2>
+                    <hr>
+                    <p><strong>Sessão:</strong> <span id="resumo-servico" class="text-right">...</span></p>
+                    <p><strong>Data:</strong> <span id="resumo-data" class="text-right">...</span></p>
+                    <p><strong>Hora:</strong> <span id="resumo-hora" class="text-right">...</span></p>
+                    <p class="total"><strong>Valor:</strong> <span id="resumo-preco">...</span></p>
+                </div>
+                <button class="btn-primary" onclick="mudarPasso(4)">
+                    Ir para Pagamento <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i>
+                </button>
+            </section>
+
+            <section id="passo-4" class="step-container">
+                <div class="pix-card">
+                    <div class="pix-header">
+                        <i class="fa-brands fa-pix" style="color: #32bcad; font-size: 2rem;"></i>
+                        <h2>Pagamento via Pix</h2>
+                    </div>
+                    <p class="pix-instrucoes">Para garantir seu horário, realize o pagamento via QR Code ou copie a chave abaixo.</p>
+                    <div class="qr-code-box">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ChavePixDaSuaClinicaAqui" alt="QR Code Pix">
+                    </div>
+                    <div class="chave-pix-container">
+                        <label>Chave Pix (Celular, E-mail ou CNPJ):</label>
+                        <div class="input-group">
+                            <input type="text" id="chave-pix" value="11999999999" readonly>
+                            <button onclick="copiarPix()" id="btn-copiar"><i class="fa-regular fa-copy"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-whatsapp" onclick="enviarWhatsApp()">
+                    <i class="fa-brands fa-whatsapp"></i> Enviar Comprovante
+                </button>
+            </section>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+<style>
+    :root {
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --primary-color: #0284c7; /* Azul sereno (Psicologia) */
+    --primary-light: #e0f2fe;
+    --text-dark: #334155;
+    --text-light: #64748b;
+    --border-color: #e2e8f0;
+}
+
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #cbd5e1;
+    display: flex; justify-content: center;
+    color: var(--text-dark);
+}
+
+.app-wrapper {
+    width: 100%; max-width: 420px;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+    overflow-x: hidden;
+    display: flex; flex-direction: column;
+}
+
+/* --- Estilo da Capa (Landing Page) --- */
+.capa-container {
+    display: none; /* Escondido por padrão, mostrado via JS */
+    min-height: 100vh; width: 100%;
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--primary-light) 100%);
+    justify-content: center; align-items: center;
+    padding: 40px 30px; text-align: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.active-capa { display: flex; flex-direction: column; }
+.capa-content { max-width: 320px; display: flex; flex-direction: column; align-items: center; }
+
+/* NOVO: Estilo moderno para a Foto da Psicóloga */
+.capa-profile-pic {
+    width: 140px; height: 140px;
+    border-radius: 50%; /* Formato circular */
+    object-fit: cover; /* Impede que a foto estique */
+    border: 4px solid #fff; /* Aro branco sutil */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12); /* Sombra para profundidade */
+    margin-bottom: 20px;
+}
+
+.logo-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; opacity: 0.8; }
+.capa-container h1 { font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 5px; }
+.capa-container h2 { font-size: 1rem; color: var(--primary-color); font-weight: 500; margin-bottom: 20px; }
+.capa-container p { font-size: 0.95rem; color: var(--text-light); line-height: 1.5; margin-bottom: 40px; }
+
+/* Classe utilitária para esconder área de booking */
+.hidden { display: none !important; }
+#booking-area { animation: fadeIn 0.3s ease-in; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- Cabeçalho e Progresso --- */
+.top-bar {
+    background-color: var(--card-bg); padding: 22px 20px; display: flex;
+    justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);
+    position: sticky; top: 0; z-index: 10;
+}
+.top-bar h1 { font-size: 1.15rem; font-weight: 600; color: var(--text-dark); }
+.top-bar button { background: none; border: none; font-size: 1.3rem; color: var(--text-light); cursor: pointer; transition: color 0.2s; }
+.top-bar button:hover { color: var(--primary-color); }
+
+.progress-bar { height: 4px; background-color: var(--border-color); width: 100%; }
+.progress-fill { height: 100%; background-color: var(--primary-color); width: 0%; transition: width 0.4s ease-in-out; }
+
+/* --- Containers dos Passos --- */
+.step-container { padding: 20px; display: none; animation: slideIn 0.3s ease-out forwards; flex-grow: 1; }
+.step-container.active { display: block; }
+.scrollable { max-height: calc(100vh - 100px); overflow-y: auto; padding-bottom: 40px; }
+.scrollable::-webkit-scrollbar { display: none; }
+
+@keyframes slideIn { from { opacity: 0; transform: translateX(15px); } to { opacity: 1; transform: translateX(0); } }
+
+/* --- Cards de Serviço --- */
+.service-option {
+    background-color: var(--card-bg); border: 1px solid var(--border-color);
+    border-radius: 16px; padding: 18px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 16px; cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+.service-option:active { transform: scale(0.97); border-color: var(--primary-color); }
+.icon-box {
+    width: 52px; height: 52px; border-radius: 14px;
+    background-color: var(--primary-light); color: var(--primary-color);
+    display: flex; justify-content: center; align-items: center; font-size: 1.4rem; flex-shrink: 0;
+}
+.info h3 { font-size: 1rem; margin-bottom: 4px; color: #0f172a; }
+.info p { font-size: 0.85rem; color: var(--text-light); line-height: 1.3; }
+.price { margin-left: auto; font-weight: 700; color: var(--primary-color); font-size: 1.1rem; }
+
+/* --- Formulário Limpo --- */
+.form-clean label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; color: var(--text-dark); }
+.form-clean input {
+    width: 100%; padding: 16px; border-radius: 12px; border: 2px solid var(--border-color);
+    font-size: 1.05rem; color: var(--text-dark); background-color: var(--card-bg); outline: none; transition: border-color 0.3s;
+}
+.form-clean input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 4px var(--primary-light); }
+
+/* --- Resumo --- */
+.summary-card {
+    background-color: var(--card-bg); border-radius: 16px; padding: 24px;
+    border: 1px solid var(--border-color); margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+.summary-card h2 { font-size: 1.15rem; margin-bottom: 15px; color: #0f172a; }
+.summary-card hr { border: none; border-top: 1px dashed var(--border-color); margin: 15px 0; }
+.summary-card p { margin-bottom: 12px; display: flex; justify-content: space-between; color: var(--text-light); font-size: 0.95rem; }
+.summary-card strong { color: var(--text-dark); }
+.text-right { text-align: right; max-width: 60%; font-weight: 500; }
+.summary-card .total { font-size: 1.25rem; color: var(--primary-color); margin-top: 20px; font-weight: 700; }
+
+/* --- Botões --- */
+.btn-primary, .btn-whatsapp {
+    width: 100%; padding: 18px; border-radius: 14px; border: none; font-size: 1.05rem; font-weight: 600; cursor: pointer; transition: 0.2s;
+}
+.step-container .btn-primary { background-color: var(--primary-color); color: #fff; margin-top: 20px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
+.btn-whatsapp {
+    background-color: #25D366; color: #fff; display: flex; justify-content: center;
+    align-items: center; gap: 10px; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); margin-top: 20px;
+}
+.btn-primary:active, .btn-whatsapp:active { transform: scale(0.97); }
+.disclaimer { text-align: center; font-size: 0.8rem; color: var(--text-light); margin-top: 15px; }
+
+/* --- Estilos do Passo 4 (Pix) --- */
+.pix-card {
+    background-color: var(--card-bg); border-radius: 16px; padding: 24px;
+    border: 1px solid #32bcad; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(50, 188, 173, 0.1); text-align: center;
+}
+.pix-header { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
+.pix-header h2 { font-size: 1.25rem; color: #0f172a; font-weight: 700; }
+.pix-instrucoes { font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px; line-height: 1.4; }
+.qr-code-box { background: #fff; padding: 15px; border: 2px dashed #e2e8f0; border-radius: 12px; display: inline-block; margin-bottom: 20px; }
+.qr-code-box img { width: 150px; height: 150px; }
+.chave-pix-container { text-align: left; }
+.chave-pix-container label { font-size: 0.85rem; color: var(--text-dark); font-weight: 600; margin-bottom: 8px; display: block; }
+.input-group button { padding: 0 20px; border-radius: 8px; border: none; background: #32bcad; color: #fff; cursor: pointer; transition: 0.2s; font-size: 1.1rem; }
+.input-group button.copiado { background-color: #10b981; }
+</style>
+
+    <script>
+// Objeto que guarda os dados na memória (PT-BR e Reais R$)
+let dadosAgendamento = {
+    servico: '',
+    preco: '',
+    data_bruta: '',
+    data: '',
+    hora: ''
+};
+
+let passoAtual = 1;
+
+// ATENÇÃO: Substitua pelo seu DDD e número do consultório
+const numeroWhatsApp = '5511999999999';
+
+// Seletores
+const titulo = document.getElementById('titulo-passo');
+const barraProgresso = document.getElementById('progress');
+const btnVoltar = document.getElementById('btn-voltar');
+
+// Inicia a página
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Bloqueia datas antigas no calendário
+    const hoje = new Date().toISOString().split('T')[0];
+    const dataInput = document.getElementById('data');
+    if(dataInput) dataInput.setAttribute('min', hoje);
+    
+    // 2. Tenta carregar de onde o paciente parou
+    carregarProgresso();
+});
+
+// Transição da Capa para o App de Agendamento
+function iniciarAgendamento() {
+    document.getElementById('capa').classList.remove('active-capa');
+    document.getElementById('booking-area').classList.remove('hidden');
+    mudarPasso(1);
+    salvarProgresso();
+}
+
+/* --- MÁGICA DO SALVAMENTO (LOCALSTORAGE) --- */
+function salvarProgresso() {
+    // Só salva se o paciente já passou da capa
+    if (!document.getElementById('capa').classList.contains('active-capa')) {
+        localStorage.setItem('app_psico_dados_br', JSON.stringify(dadosAgendamento));
+        localStorage.setItem('app_psico_passo_br', passoAtual);
+    }
+}
+
+function limparProgresso() {
+    localStorage.removeItem('app_psico_dados_br');
+    localStorage.removeItem('app_psico_passo_br');
+}
+
+function carregarProgresso() {
+    const dadosSalvos = localStorage.getItem('app_psico_dados_br');
+    const passoSalvo = localStorage.getItem('app_psico_passo_br');
+
+    // Se houver agendamento salvo, ignoramos a capa e vamos direto para onde parou
+    if (dadosSalvos && passoSalvo) {
+        dadosAgendamento = JSON.parse(dadosSalvos);
+        const passo = parseInt(passoSalvo);
+
+        // Esconde a capa e mostra área de agendamento
+        document.getElementById('capa').classList.remove('active-capa');
+        document.getElementById('booking-area').classList.remove('hidden');
+
+        // Devolve valores para calendários
+        if(dadosAgendamento.data_bruta) document.getElementById('data').value = dadosAgendamento.data_bruta;
+        if(dadosAgendamento.hora) document.getElementById('hora').value = dadosAgendamento.hora;
+
+        // Se parou no resumo ou pagamento, refazemos o resumo visual
+        if (passo >= 3) {
+            document.getElementById('resumo-servico').innerText = dadosAgendamento.servico;
+            document.getElementById('resumo-data').innerText = dadosAgendamento.data;
+            document.getElementById('resumo-hora').innerText = dadosAgendamento.hora;
+            document.getElementById('resumo-preco').innerText = `R$ ${dadosAgendamento.preco}`;
+        }
+
+        mudarPasso(passo);
+    }
+}
+/* ------------------------------------------- */
+
+// Ouve quando o paciente digita data/hora e salva na hora
+document.getElementById('data').addEventListener('change', (e) => {
+    dadosAgendamento.data_bruta = e.target.value;
+    salvarProgresso();
+});
+document.getElementById('hora').addEventListener('change', (e) => {
+    dadosAgendamento.hora = e.target.value;
+    salvarProgresso();
+});
+
+// PASSO 1: Selecionar o Serviço
+function selecionarServico(nome, preco) {
+    dadosAgendamento.servico = nome;
+    dadosAgendamento.preco = preco.toFixed(2).replace('.', ',');
+    mudarPasso(2);
+}
+
+// PASSO 2: Validar e ir para o Resumo
+function irParaResumo() {
+    const inputData = document.getElementById('data').value;
+    const inputHora = document.getElementById('hora').value;
+
+    if (!inputData || !inputHora) {
+        alert("Por favor, selecione um dia e um horário para a consulta.");
+        return;
+    }
+
+    dadosAgendamento.data_bruta = inputData;
+    const dataObj = new Date(inputData + 'T00:00:00');
+    dadosAgendamento.data = dataObj.toLocaleDateString('pt-BR');
+    dadosAgendamento.hora = inputHora;
+
+    document.getElementById('resumo-servico').innerText = dadosAgendamento.servico;
+    document.getElementById('resumo-data').innerText = dadosAgendamento.data;
+    document.getElementById('resumo-hora').innerText = dadosAgendamento.hora;
+    document.getElementById('resumo-preco').innerText = `R$ ${dadosAgendamento.preco}`;
+
+    mudarPasso(3);
+}
+
+// Navegação entre telas (Wizard de 4 passos)
+function mudarPasso(novoPasso) {
+    // Esconde o atual
+    document.getElementById(`passo-${passoAtual}`).classList.remove('active');
+    passoAtual = novoPasso;
+    // Mostra o novo
+    document.getElementById(`passo-${passoAtual}`).classList.add('active');
+
+    // Ajuste da barra de progresso (25%, 50%, 75%, 100%)
+    if (passoAtual === 1) {
+        titulo.innerText = "Escolha a Sessão";
+        barraProgresso.style.width = "25%";
+        btnVoltar.classList.add('hidden');
+    } else if (passoAtual === 2) {
+        titulo.innerText = "Data e Horário";
+        barraProgresso.style.width = "50%";
+        btnVoltar.classList.remove('hidden');
+    } else if (passoAtual === 3) {
+        titulo.innerText = "Confirmação";
+        barraProgresso.style.width = "75%";
+        btnVoltar.classList.remove('hidden');
+    } else if (passoAtual === 4) {
+        titulo.innerText = "Pagamento";
+        barraProgresso.style.width = "100%";
+        btnVoltar.classList.remove('hidden');
+    }
+    
+    salvarProgresso();
+}
+
+function voltarPasso() {
+    if (passoAtual > 1) {
+        mudarPasso(passoAtual - 1);
+    }
+}
+
+// Função para o botão de copiar a chave Pix
+function copiarPix() {
+    const chaveInput = document.getElementById('chave-pix');
+    chaveInput.select();
+    chaveInput.setSelectionRange(0, 99999); // Para mobile
+    navigator.clipboard.writeText(chaveInput.value);
+    
+    // Feedback visual no botão
+    const btn = document.getElementById('btn-copiar');
+    btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+    btn.classList.add('copiado');
+    
+    setTimeout(() => {
+        btn.innerHTML = '<i class="fa-regular fa-copy"></i>';
+        btn.classList.remove('copiado');
+    }, 2000);
+}
+
+// PASSO 4: Enviar WhatsApp com comprovante
+function enviarWhatsApp() {
+    const mensagem = `Olá Drª. Ana! Realizei o agendamento e o pagamento Pix:\n\n` +
+                     `🧠 *Sessão:* ${dadosAgendamento.servico}\n` +
+                     `📅 *Data:* ${dadosAgendamento.data}\n` +
+                     `⏰ *Horário:* ${dadosAgendamento.hora}\n` +
+                     `💵 *Valor:* R$ ${dadosAgendamento.preco}\n\n` +
+                     `Segue o comprovante em anexo. Aguardo confirmação!`;
+
+    const urlMensagem = encodeURIComponent(mensagem);
+    const link = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${urlMensagem}`;
+    
+    // Limpa a memória e finaliza
+    limparProgresso();
+    
+    // Recarregar a página após um tempo para voltar à capa
+    setTimeout(() => {
+        window.location.reload();
+    }, 1500);
+
+    window.open(link, '_blank');
+}
+    </script>
+</body>
+</html>
