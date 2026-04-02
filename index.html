@@ -6,6 +6,10 @@
     <title>Drª. Ana Silva | Psicologia Clínica - Agendamento</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+   
+     
+   
 </head>
 <body>
 
@@ -14,10 +18,10 @@
         <section id="capa" class="capa-container active-capa">
             <div class="capa-content">
                 
-                <img src="URL_DA_SUA_FOTO.jpg" alt="Foto da Drª. Ana Silva" class="capa-profile-pic">
+                <img src="URL_DA_SUA_FOTO.jpg" alt="Foto da Drª. Ediléia Rodrigues" class="capa-profile-pic">
                 
                 <i class="fa-solid fa-brain-circuit logo-icon"></i>
-                <h1>Drª. Ana Silva</h1>
+                <h1>Drª. Ediléia Rodrigues</h1>
                 <h2>Psicologia Clínica & Bem-Estar</h2>
                 <p>Encontre equilíbrio e acolhimento. Um espaço seguro para a sua jornada de autoconhecimento.</p>
                 <button class="btn-primary" onclick="iniciarAgendamento()">Fazer um Agendamento <i class="fa-solid fa-arrow-right"></i></button>
@@ -101,13 +105,15 @@
                         <h2>Pagamento via Pix</h2>
                     </div>
                     <p class="pix-instrucoes">Para garantir seu horário, realize o pagamento via QR Code ou copie a chave abaixo.</p>
+                    
                     <div class="qr-code-box">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ChavePixDaSuaClinicaAqui" alt="QR Code Pix">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=guuholiveira2202@gmail.com" alt="QR Code Pix">
                     </div>
+                    
                     <div class="chave-pix-container">
-                        <label>Chave Pix (Celular, E-mail ou CNPJ):</label>
+                        <label>Chave Pix (E-mail):</label>
                         <div class="input-group">
-                            <input type="text" id="chave-pix" value="11999999999" readonly>
+                            <input type="text" id="chave-pix" value="guuholiveira2202@gmail.com" readonly>
                             <button onclick="copiarPix()" id="btn-copiar"><i class="fa-regular fa-copy"></i></button>
                         </div>
                     </div>
@@ -288,7 +294,7 @@ let dadosAgendamento = {
 let passoAtual = 1;
 
 // ATENÇÃO: Substitua pelo seu DDD e número do consultório
-const numeroWhatsApp = '5511999999999';
+const numeroWhatsApp = '5511930862733';
 
 // Seletores
 const titulo = document.getElementById('titulo-passo');
