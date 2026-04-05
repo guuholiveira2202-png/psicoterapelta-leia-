@@ -30,7 +30,12 @@
                 
                 <h1>Drª. Vitoria Rodrigues</h1>
                 <p class="crp-text">Psicoterapeuta Clínica  • CRP 06/123456
-                    Autora | 2 livros   </p> 
+                    Autora | 2 livros  <br>
+                Especialidades: <br> [ Terapia Comportamental], <br>
+                [ Ansiedade ], [ Relacionamentos ].</p> 
+
+                
+
                 <p class="capa-descricao">Encontre equilíbrio e acolhimento. Um espaço seguro e confortável para a sua jornada de autoconhecimento.</p>
 
 
@@ -83,6 +88,7 @@
                 </div>
 
 
+ 
 
 
 
@@ -136,15 +142,29 @@
                 </div>
             </section>
 
+
             <section id="passo-2" class="step-container">
                 <div class="form-clean">
                     <label for="data">Qual é o melhor dia?</label>
                     <input type="date" id="data" required>
                     
-                    <label for="hora" style="margin-top: 25px;">E qual horário?</label>
-                    <input type="time" id="hora" required>
+                    <label style="margin-top: 25px;">E qual horário?</label>
+                    
+                    <div class="time-grid">
+                        <button type="button" class="time-slot" onclick="selecionarHorario(this, '08:00')">08:00</button>
+                        <button type="button" class="time-slot" onclick="selecionarHorario(this, '09:00')">09:00</button>
+                        <button type="button" class="time-slot" onclick="selecionarHorario(this, '10:00')">10:00</button>
+                        <button type="button" class="time-slot" onclick="selecionarHorario(this, '11:00')">11:00</button>
+                        <button type="button" class="time-slot" onclick="selecionarHorario(this, '13:00')">13:00</button>
+                        <button type="button" class="time-slot" onclick="selecionarHorario(this, '14:00')">14:00</button>
+                        <button type="button" class="time-slot" onclick="selecionarHorario(this, '15:00')">15:00</button>
+                        <button type="button" class="time-slot" onclick="selecionarHorario(this, '16:00')">16:00</button>
+                        <button type="button" class="time-slot" onclick="selecionarHorario(this, '17:00')">17:00</button>
+                    </div>
+
+                    <input type="hidden" id="hora">
                 </div>
-                <button class="btn-primary mt-auto" onclick="irParaResumo()">Continuar</button>
+                <button class="btn-primary" style="margin-top: 40px;" onclick="irParaResumo()">Continuar</button>
             </section>
 
             <section id="passo-3" class="step-container">
@@ -398,7 +418,44 @@ body {
 .chave-pix-container label { font-size: 0.85rem; color: var(--text-dark); font-weight: 600; margin-bottom: 8px; display: block; }
 .input-group button { padding: 0 20px; border-radius: 8px; border: none; background: #32bcad; color: #fff; cursor: pointer; transition: 0.2s; font-size: 1.1rem; }
 .input-group button.copiado { background-color: #10b981; }
+
+/* --- Grade de Horários (Estilo Doctoralia/Calendly) --- */
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.time-slot {
+    background-color: #ffffff;
+    border: 2px solid var(--border-color);
+    color: var(--text-dark);
+    padding: 14px 0;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.time-slot:hover {
+    border-color: var(--primary-light);
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.time-slot.selected {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    transform: scale(1.05);
+}
     </style>
+
+
     <script>
         // --- CONFIGURAÇÕES INICIAIS ---
 let dadosAgendamento = {
@@ -637,6 +694,20 @@ function enviarWhatsApp() {
 
     // Abre o WhatsApp
     window.open(link, '_blank');
+}
+
+
+// --- Lógica para os Botões de Horário ---
+function selecionarHorario(elementoBotao, horarioEscolhido) {
+    // 1. Remove a marcação (cor azul) de todos os botões
+    const todosOsBotoes = document.querySelectorAll('.time-slot');
+    todosOsBotoes.forEach(botao => botao.classList.remove('selected'));
+    
+    // 2. Adiciona a marcação apenas no botão que o usuário clicou
+    elementoBotao.classList.add('selected');
+    
+    // 3. Salva o horário no input escondido para ir para o resumo corretamente
+    document.getElementById('hora').value = horarioEscolhido;
 }
     </script>
 </body>
