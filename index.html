@@ -88,7 +88,45 @@
                 </div>
 
 
- 
+<div class="capa-comentarios">
+                    <h3>Experiência no Consultório</h3>
+                    
+                    <div class="comentarios-grid">
+                        <div class="comentario-card">
+                            <div class="comentario-topo">
+                                <div class="comentario-avatar" style="background-color: #fca5a5;">M</div>
+                                <div class="comentario-info">
+                                    <h4>Mariana L.</h4>
+                                    <div class="comentario-estrelas">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>"O ambiente do consultório é extremamente acolhedor, limpo e transmite muita paz. O café na recepção é um detalhe muito especial!"</p>
+                        </div>
+
+                        <div class="comentario-card">
+                            <div class="comentario-topo">
+                                <div class="comentario-avatar" style="background-color: #93c5fd;">R</div>
+                                <div class="comentario-info">
+                                    <h4>Roberto A.</h4>
+                                    <div class="comentario-estrelas">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>"Local de muito fácil acesso e poltronas super confortáveis. A pontualidade nos horários me ajuda muito a organizar meu dia."</p>
+                        </div>
+                    </div>
+                </div>
 
 
 
@@ -101,7 +139,7 @@
             </div>
         </section>
 
-        <div id="booking-area" class="hidden">
+       <div id="booking-area" class="hidden">
             <header class="top-bar">
                 <button id="btn-voltar" class="hidden" onclick="voltarPasso()">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -109,6 +147,10 @@
                 <h1 id="titulo-passo">Escolha a Sessão</h1>
                 <div style="width: 24px;"></div>
             </header>
+
+
+
+           
 
             <div class="progress-bar">
                 <div class="progress-fill" id="progress"></div>
@@ -453,6 +495,94 @@ body {
     box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
     transform: scale(1.05);
 }
+
+
+
+
+/* --- Seção de Comentários / Avaliações --- */
+.capa-comentarios {
+    width: 100%;
+    margin-bottom: 35px;
+    text-align: left;
+}
+
+.capa-comentarios h3 {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.comentarios-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comentario-card {
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.comentario-topo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.comentario-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.comentario-info h4 {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+    font-weight: 600;
+}
+
+.comentario-estrelas {
+    color: #fbbf24; /* Cor amarela para as estrelas */
+    font-size: 0.75rem;
+    display: flex;
+    gap: 2px;
+}
+
+.comentario-card p {
+    font-size: 0.9rem !important;
+    color: var(--text-light) !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    font-style: italic;
+}
+
+
+/* Organiza a seta e o título na mesma linha */
+.cabecalho-sessao {
+  display: flex;
+  align-items: center; /* Centraliza verticalmente a seta com o texto */
+  gap: 15px; /* Define o espaço entre a seta e o título */
+  margin-bottom: 20px;
+}
+
+
+
+
     </style>
 
 
@@ -709,6 +839,10 @@ function selecionarHorario(elementoBotao, horarioEscolhido) {
     // 3. Salva o horário no input escondido para ir para o resumo corretamente
     document.getElementById('hora').value = horarioEscolhido;
 }
+
+
+
+
     </script>
 </body>
 </html>
