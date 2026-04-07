@@ -813,17 +813,12 @@ function enviarWhatsApp() {
             });
     }
 
-// --- PASSO FINAL: Enviar WhatsApp, Baixar Calendário e limpar a tela ---
-function enviarWhatsApp() {
-    // 1. Envio de E-mail (EmailJS)
-    const templateParams = {
-        servico: dadosAgendamento.servico,
-        data: dadosAgendamento.data,
-        hora: dadosAgendamento.hora,
-        preco: dadosAgendamento.preco
-    };
 
 
+
+
+
+   
     // Monta o texto para o WhatsApp
     const mensagem = `Olá Drª. Vitoria! Realizei o agendamento e o pagamento Pix:\n\n` +
                      `🧠 *Sessão:* ${dadosAgendamento.servico}\n` +
