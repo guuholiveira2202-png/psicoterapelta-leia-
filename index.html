@@ -638,7 +638,6 @@ function iniciarAgendamento() {
     }
 }
 
-
 // --- NAVEGAÇÃO ENTRE OS PASSOS ---
 function mudarPasso(novoPasso) {
     // Remove a classe 'active' de todos os passos
@@ -659,29 +658,33 @@ function mudarPasso(novoPasso) {
     const barraProgresso = document.getElementById('progress');
     const btnVoltar = document.getElementById('btn-voltar');
 
+    // Agora o botão de voltar FICA VISÍVEL em todos os passos!
+    btnVoltar.classList.remove('hidden');
+
     if (passoAtual === 1) {
         titulo.innerText = "Escolha a Sessão";
         barraProgresso.style.width = "25%";
-        btnVoltar.classList.add('hidden');
     } else if (passoAtual === 2) {
         titulo.innerText = "Data e Horário";
         barraProgresso.style.width = "50%";
-        btnVoltar.classList.remove('hidden');
     } else if (passoAtual === 3) {
         titulo.innerText = "Confirmação";
         barraProgresso.style.width = "75%";
-        btnVoltar.classList.remove('hidden');
     } else if (passoAtual === 4) {
         titulo.innerText = "Pagamento";
         barraProgresso.style.width = "100%";
-        btnVoltar.classList.remove('hidden');
     }
     
     salvarProgresso();
 }
 
 function voltarPasso() {
-    if (passoAtual > 1) {
+    if (passoAtual === 1) {
+        // Se estiver no Passo 1, esconde o app e volta para a Capa inicial
+        document.getElementById('booking-area').classList.add('hidden');
+        document.getElementById('capa').classList.add('active-capa');
+    } else if (passoAtual > 1) {
+        // Se estiver nos outros passos, apenas volta um passo para trás
         mudarPasso(passoAtual - 1);
     }
 }
