@@ -836,6 +836,59 @@ function enviarWhatsApp() {
 }
 
 
+// --- FUNÇÃO DE SUPORTE: Cria o arquivo .ics invisível e força o download ---
+function gerarCalendarioAutomatico() {
+    if (!dadosAgendamento.data_bruta || !dadosAgendamento.hora) {
+        console.warn("Data ou hora não definidos para o calendário.");
+        return;
+    }
+
+    // Formata os dados para o padrão do calendário
+    const dataFormatada = dadosAgendamento.data_bruta.replace(/-/g, '');
+    const horaFormatada = dadosAgendamento.hora.replace(':', '') + '00';
+    
+    // Calcula 1 hora de duração
+    const [hora, minuto] = dadosAgendamento.hora.split(':');
+    const horaFim = (parseInt(hora) + 1).toString().padStart(2, '0') + minuto + '00';
+
+    // Monta o arquivo
+    const icsContent = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "BEGIN:VEVENT",
+        `SUMMARY:Sessão de Terapia - Drª. Vitoria`,
+        `DTSTART;TZID=America/Sao_Paulo:${dataFormatada}T${horaFormatada}`,
+        `DTEND;TZID=America/Sao_Paulo:${dataFormatada}T${horaFim}`,
+        `DESCRIPTION:Sessão agendada: ${dadosAgendamento.servico}. Aguardando confirmação no WhatsApp.`,
+        "LOCATION:Atendimento Online / Consultório",
+        "END:VEVENT",
+        "END:VCALENDAR"
+    ].join("\n");
+
+    // Cria o arquivo e força o download
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = window.URL.createObjectURL(blob);
+    const linkDocumento = document.createElement('a');
+    
+    linkDocumento.href = url;
+    linkDocumento.setAttribute('download', 'minha-sessao-terapia.ics');
+    document.body.appendChild(linkDocumento);
+    linkDocumento.click(); // Simula o clique automático
+    document.body.removeChild(linkDocumento);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 // --- Lógica para os Botões de Horário ---
 function selecionarHorario(elementoBotao, horarioEscolhido) {
     // 1. Remove a marcação (cor azul) de todos os botões
